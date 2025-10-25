@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Click Game</title>
+    <link rel="stylesheet" href="./css/style.css"/>
+</head>
+<script async src="https://gamepush.com/sdk/game-score.js?projectId=24856&publicToken=X3UF9uQERBuBevb71Fa9Dflf0q21naTW&callback=onGPInit"></script>
+<script>
+    window.onGPInit = async (gp) => {
+        console.log('GamePush SDK initialized');
+        try {
+            await gp.player.ready;
+            console.log('Player synced with server');
+
+            await gp.ads.showPreloader();
+            console.log('Preloader shown');
+
+            gp.ads.showSticky();
+            console.log('Sticky ad shown');
+        } catch (error) {
+            console.error('SDK initialization error:', error);
+        }
+    };
+</script>
+<body>
+
+    <h1>Circle Click</h1>
+    <div id="score">Score: 0</div>
+    <div id="timer">Time: 30</div>
+    <div id="highScoreText">High Score: 0</div>
+
+    <div class="volume-control">
+        <span id="volume-icon">🔊</span>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1.0" />
+    </div>
+
+    <div class="audio-controls">
+        <label><input type="checkbox" id="sfxToggle" checked> 🎵 Sfx</label>
+        <label><input type="checkbox" id="voiceToggle" checked> 🗣️ Voice</label>
+    </div>
+
+    <button id="start">Start Game</button>
+    <button id="restart">Restart</button>
+
+    <div id="circle">
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="mouth">
+            <div class="teeth"></div>
+            <div class="tongue"></div>
+        </div>
+        <div class="speech">Ow!</div>
+    </div>
+
+    <canvas id="fireworksCanvas"></canvas>
+    <div id="congratsMessage"></div>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>
